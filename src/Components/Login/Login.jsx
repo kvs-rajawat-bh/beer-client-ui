@@ -38,9 +38,14 @@ class Login extends Component {
                         loginFailed: false
                     })
                     console.log("valid");
-                    this.props.history.push("/beer")
+                    sessionStorage.setItem("user", JSON.stringify(resolve.data))
+                    this.props.history.push("/breweries")
                 }
                 else {
+                    this.setState({
+                        loginSuccess:false,
+                        loginFailed:true
+                    })
                     console.log(resolve)
                 }
             })
@@ -57,24 +62,24 @@ class Login extends Component {
                         <div class="card-body">
                             <form>
                                 <div class="input-group form-group">
-                                    {this.state.loginFailed && <p>Login Failed</p>}
+                                    {this.state.loginFailed && window.alert("Invalid Credentials")}
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" onChange={this.update} placeholder="username"/>
+                                    <input type="text" class="form-control" name="username" onChange={this.handleChange} placeholder="username"/>
 
                                 </div>
                                 <div class="input-group form-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                                     </div>
-                                    <input type="password" class="form-control" onChange={this.update} placeholder="password"/>
+                                    <input type="password" class="form-control" name="password" onChange={this.handleChange} placeholder="password"/>
 					            </div>
                                 <div class="row align-items-center remember">
                                     <input type="checkbox"/>Remember Me
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Login" class="btn float-right login_btn"/>
+                                    <input type="button" value="Login" class="btn float-right login_btn" onClick={this.validate}/>
 					            </div>
 				            </form>
                         </div>
