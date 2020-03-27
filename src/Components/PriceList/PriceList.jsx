@@ -3,7 +3,9 @@ import axios from 'axios'
 import "./PriceList.css"
 import CounterButton from "../OrderComponent/CounterButtons"
 import CounterComponent from "../OrderComponent/OrderComponents"
-
+import Navbar from "../Navbar/Navbar"
+import MainCarousel from "../MainCarousel/MainCarousel"
+import BreweryCard from "../BreweryCard/BreweryCard"
 export default class PriceList extends Component {
 
     constructor() {
@@ -81,52 +83,9 @@ export default class PriceList extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <h1>Search</h1>
-                    <input type="text" onChange={this.update} name="breweryName" /><br />
-                    <button type="text" onClick={this.searchBrewery}>Search</button>
-                </div>
-                
-                    <div>
-                    {Object.keys(this.state.beerList).length > 0 &&
-                        <div>
-                            <div>
-                                <div>
-                                    <div>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Cost</th>
-                                                    <th>Order Now</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                {this.state.beerList.map((value, index) => {
-                                                    return (
-                                                        <tr>
-                                                            <td>{value.name}</td>
-                                                            <td>{value.cost}$</td>
-                                                            <td><CounterComponent addMethod={this.add} removeMethod={this.remove} data={value} /></td>
-                                                        </tr>
-                                                    )
-                                                })}
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        }
-                    </div>
-
-                    <button onClick={this.sendOrder}>order</button>
-
-            </div >
+                <Navbar/>
+                <BreweryCard/>
+            </div > 
                                         
         )
 }
